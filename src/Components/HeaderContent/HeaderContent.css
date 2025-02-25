@@ -1,0 +1,55 @@
+/* HeaderContent.css */
+
+/* Header container with ash-colored background */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background: #02a161; /* Ash color */
+    color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Remove border curves */
+  .header-container, .menu-link {
+    border-radius: 0;
+  }
+  
+  /* Logo styling */
+  .header-logo {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  /* Navigation bar */
+  .navbar {
+    display: flex;
+    gap: 20px;
+  }
+  
+  /* Menu link styling */
+  .menu-link {
+    padding: 8px 15px;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .menu-link-text {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  /* Hover Effects */
+  .menu-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  .menu-link-text:hover {
+    color: #f8f9fa;
+  }
+  

@@ -1,0 +1,17 @@
+/* Additional container styling for ParentComponent */
+.resume-container {
+    padding-top: 30px;
+    margin-inline: 20px;
+    /* display: flex; */
+     /* Allow wrapping on smaller screens */
+  }
+
+
+.welcome-note {
+  padding-top: 25px;
+  margin-inline: 25px;
+  text-align: left;
+}
+  
+  
+  
