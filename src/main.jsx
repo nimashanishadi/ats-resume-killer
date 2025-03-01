@@ -7,6 +7,7 @@ import App from './App.jsx'
 import BlogPage from './pages/BlogPage.jsx'
 import Contact from './pages/Contact.jsx'
 import AboutUs from './pages/AboutUs.jsx'
+import ScanResult from './pages/ScanResult.jsx'
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/contact",
     element: <Contact />,
+  },
+  {
+    path: "/scanresult",
+    element: <ScanResult />,
   },
 ]);
 

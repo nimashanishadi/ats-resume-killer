@@ -4,6 +4,8 @@ import { setResume, setJobDescription, resetInputs } from "../../../store/slices
 import { sendUserData } from "../../../api/api";
 import "./UserInput.css";
 
+
+
 const UserInput = () => {
   const dispatch = useDispatch();
   const { resume, jobDescription } = useSelector((state) => state.userInput);
@@ -11,6 +13,7 @@ const UserInput = () => {
   const handleScan = async () => {
     await sendUserData({ resume, jobDescription });
     dispatch(resetInputs()); // Clear fields after sending
+     
   };
 
   return (

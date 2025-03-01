@@ -10,6 +10,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import Store from "./store/store";
 import UserInput from "./Components/CustomerInput/UserInput/UserInput";
+import Footer from './Components/Footer/Footer'
 
 
 
@@ -19,8 +20,10 @@ function App() {
   return (
     <Provider store={Store}>
       <div id='wrapper'>
+        
         <HeaderContent/>
         <WelcomeCustomer/>
+        <Footer/>
         
       </div>
       </Provider>
