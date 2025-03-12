@@ -1,26 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  resume: "",
-  jobDescription: "",
+  resumeFile: null, // Store file here
+  jobDescription: ""
 };
 
 const userInputSlice = createSlice({
   name: "userInput",
   initialState,
   reducers: {
-    setResume: (state, action) => {
-      state.resume = action.payload;
+    setResumeFile: (state, action) => {
+      state.resumeFile = action.payload;
     },
     setJobDescription: (state, action) => {
       state.jobDescription = action.payload;
     },
     resetInputs: (state) => {
-      state.resume = "";
+      state.resumeFile = null;
       state.jobDescription = "";
     },
   },
 });
 
-export const { setResume, setJobDescription, resetInputs } = userInputSlice.actions;
+export const { setResumeFile, setJobDescription, resetInputs } = userInputSlice.actions;
 export default userInputSlice.reducer;
