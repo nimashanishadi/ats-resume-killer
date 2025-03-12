@@ -1,19 +1,21 @@
+// UserInput.jsx
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setResumeFile, setJobDescription, resetInputs } from "../../../store/slices/userInputSlice";
-import { sendUserData } from "../../../api/api";
+import { setResumeFile, setJobDescription, setScanResult, resetInputs } from "../../../store/slices/userInputSlice";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for routing
 import "./UserInput.css";
 
 const UserInput = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();  // Initialize the navigate function
   const { resumeFileName, jobDescription } = useSelector((state) => state.userInput);
-  const [resumeFile, setResumeFileState] = useState(null); // Local state for the actual file
+  const [resumeFile, setResumeFileState] = useState(null);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file && file.type === "application/pdf") {
-      setResumeFileState(file); // Store file in local state
-      dispatch(setResumeFile(file.name)); // Store only file name in Redux
+      setResumeFileState(file);
+      dispatch(setResumeFile(file.name));
     } else {
       alert("Please upload a PDF file.");
     }
@@ -24,29 +26,33 @@ const UserInput = () => {
       alert("Please upload a resume.");
       return;
     }
-  
+
     const formData = new FormData();
-    formData.append("resume", resumeFile); // File
-    formData.append("jobDescription", jobDescription); // Text input
-  
+    formData.append("resume", resumeFile);
+    formData.append("jobDescription", jobDescription);
+
     try {
       const response = await fetch("http://localhost:8080/api/scan", {
         method: "POST",
-        body: formData, // FormData must be the body
+        body: formData,
       });
-  
+
       if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
+        throw new Error("Server error");
       }
-  
-      console.log("Upload successful!");
-      dispatch(resetInputs());
+
+      const data = await response.json();
+      dispatch(setScanResult(data));  // Dispatch the result from the backend
+
+      //dispatch(resetInputs());
       setResumeFileState(null);
+
+      // Navigate to UserOutput page after successful scan
+      navigate("/user-output");
     } catch (error) {
       console.error("Error uploading file:", error);
     }
   };
-  
 
   return (
     <div className="user-input-container">
@@ -55,7 +61,7 @@ const UserInput = () => {
         <div className="input-box">
           <h3>Resume (PDF)</h3>
           <input type="file" accept=".pdf" onChange={handleFileChange} />
-          {resumeFileName && <p>{resumeFileName}</p>} {/* Display file name */}
+          {resumeFileName && <p>{resumeFileName}</p>}
         </div>
 
         <div className="input-box">
