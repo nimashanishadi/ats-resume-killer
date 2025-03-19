@@ -6,22 +6,6 @@ const initialState = {
   jobDescription: "",
   extractedResumeText: "", // Store the extracted resume text
   scannedJobDescription: "", // Store the job description sent back from the backend
-  keywordsjd: [],
-  wordcount: 0,
-  address: "",
-  noofHardskillsre: 0,
-  softskillsjd: [],
-  linkedin: "",
-  matchingjdre: [],
-  noofHardskillsjd: 0,
-  softskillsre: [],
-  hardskillsjd: [],
-  noofSoftskillsjd: 0,
-  phone: "",
-  hardskillsre: [],
-  keywordsre: [],
-  noofSoftskillsre: 0,
-  email: ""
 };
 
 const userInputSlice = createSlice({
@@ -35,10 +19,14 @@ const userInputSlice = createSlice({
       state.jobDescription = action.payload;
     },
     setScanResult: (state, action) => {
-      Object.assign(state, action.payload); // Merge all fields into state
+      state.extractedResumeText = action.payload.resumeText;  // Store extracted text
+      state.scannedJobDescription = action.payload.jobDescription;  // Store scanned job description
     },
     resetInputs: (state) => {
-      Object.assign(state, initialState); // Reset to initial state
+      state.resumeFileName = "";
+      state.jobDescription = "";
+      state.extractedResumeText = "";
+      state.scannedJobDescription = "";
     },
   },
 });

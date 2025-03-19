@@ -1,15 +1,15 @@
-// UserInput.jsx
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setResumeFile, setJobDescription, setScanResult, resetInputs } from "../../../store/slices/userInputSlice";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for routing
+import { setResumeFile, setJobDescription, setScanResult } from "../../../store/slices/userInputSlice";
+import { useNavigate } from "react-router-dom"; 
 import "./UserInput.css";
 
 const UserInput = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();  // Initialize the navigate function
+  const navigate = useNavigate();  
   const { resumeFileName, jobDescription } = useSelector((state) => state.userInput);
   const [resumeFile, setResumeFileState] = useState(null);
+  const [loading, setLoading] = useState(false);  // 🔹 New loading state
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -27,6 +27,8 @@ const UserInput = () => {
       return;
     }
 
+    setLoading(true);  // 🔹 Show loading before sending request
+
     const formData = new FormData();
     formData.append("resume", resumeFile);
     formData.append("jobDescription", jobDescription);
@@ -42,15 +44,14 @@ const UserInput = () => {
       }
 
       const data = await response.json();
-      dispatch(setScanResult(data));  // Dispatch the result from the backend
+      dispatch(setScanResult(data));  
 
-      //dispatch(resetInputs());
-      setResumeFileState(null);
+      setLoading(false);  // 🔹 Hide loading
+      navigate("/user-output"); // 🔹 Navigate after receiving response
 
-      // Navigate to UserOutput page after successful scan
-      navigate("/user-output");
     } catch (error) {
       console.error("Error uploading file:", error);
+      setLoading(false);  // 🔹 Hide loading in case of error
     }
   };
 
@@ -60,7 +61,7 @@ const UserInput = () => {
       <div className="input-sections">
         <div className="input-box">
           <h3>Resume (PDF)</h3>
-          <input type="file" accept=".pdf" onChange={handleFileChange} />
+          <input type="file" accept=".pdf" onChange={handleFileChange} disabled={loading} />
           {resumeFileName && <p>{resumeFileName}</p>}
         </div>
 
@@ -70,15 +71,24 @@ const UserInput = () => {
             placeholder="Paste job description here..."
             value={jobDescription}
             onChange={(e) => dispatch(setJobDescription(e.target.value))}
+            disabled={loading}
           />
         </div>
       </div>
 
       <div className="bottom-section">
-        <button className="scan-button" onClick={handleScan}>
-          Scan
+        <button className="scan-button" onClick={handleScan} disabled={loading}>
+          {loading ? "Scanning..." : "Scan"}
         </button>
       </div>
+
+      {/* 🔹 Show loading spinner */}
+      {loading && (
+        <div className="loading-spinner">
+          <div className="spinner"></div>
+          <p>Processing, please wait...</p>
+        </div>
+      )}
     </div>
   );
 };
