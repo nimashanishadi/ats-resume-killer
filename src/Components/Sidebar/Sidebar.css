@@ -1,0 +1,45 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .nav-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .nav-list li {
+    padding: 10px 15px;
+    margin: 5px 0;
+    cursor: pointer;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  .nav-list li:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .new-scan {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .new-scan:hover {
+    background-color: #218838;
+  }
+  
