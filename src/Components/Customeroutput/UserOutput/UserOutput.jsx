@@ -5,22 +5,33 @@ import "./UserOutput.css";
 import Sidebar from "./../../Sidebar/Sidebar"; // Import Sidebar
 
 const UserOutput = () => {
-  const { extractedResumeText, scannedJobDescription, phone, email, matchingjdre } = useSelector((state) => state.userInput);
+  const { extractedResumeText, scannedJobDescription, phone, email, address, linkedin, matchingjdre, keywordsjd } = useSelector((state) => state.userInput);
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("resume");
 
-  // Function to highlight matching keywords in job description
-  const highlightKeywords = (text, keywords) => {
-    if (!keywords || keywords.length === 0) return text;
+  // Function to highlight keywords
+  const highlightKeywords = (text, matchingKeywords = [], otherKeywords = []) => {
+    if (!text) return "";
 
-    const regex = new RegExp(`(${keywords.join("|")})`, "gi"); // Create regex for all keywords
-    return text.split(regex).map((part, index) =>
-      keywords.some((word) => word.toLowerCase() === part.toLowerCase()) ? (
-        <span key={index} className="highlight-keyword">{part}</span>
-      ) : (
-        part
-      )
-    );
+    // Convert keyword lists to lowercase for case-insensitive matching
+    const matchSet = new Set(matchingKeywords.map(word => word.toLowerCase())); // Green highlight
+    const uniqueOtherKeywords = otherKeywords
+      .filter(word => !matchSet.has(word.toLowerCase())) // Exclude already highlighted words
+      .map(word => word.toLowerCase());
+
+    const regex = new RegExp(`(${[...matchSet, ...uniqueOtherKeywords].join("|")})`, "gi");
+
+    return text.split(regex).map((part, index) => {
+      if (!part) return part; // Prevent undefined errors
+
+      if (matchSet.has(part.toLowerCase())) {
+        return <span key={index} className="highlight-keyword-green">{part}</span>;
+      }
+      if (uniqueOtherKeywords.includes(part.toLowerCase())) {
+        return <span key={index} className="highlight-keyword-red">{part}</span>;
+      }
+      return part;
+    });
   };
 
   return (
@@ -57,12 +68,37 @@ const UserOutput = () => {
                   <p>Your resume shows you have <strong>{email}</strong> as your contact email address.</p>
                 </div>
               )}
+
+              {/* Address Section */}
+              {address && (
+                <div className="contact-section">
+                  <h3>🏠 Address</h3>
+                  <p>Your resume shows your address as: <strong>{address}</strong>.</p>
+                </div>
+              )}
+
+              {/* LinkedIn Section */}
+              {linkedin && (
+                <div className="contact-section">
+                  <h3>🔗 LinkedIn Profile</h3>
+                  {linkedin.startsWith("http") ? (
+                    <p>
+                      Your LinkedIn profile:{" "}
+                      <a href={linkedin} target="_blank" rel="noopener noreferrer">
+                        {linkedin}
+                      </a>
+                    </p>
+                  ) : (
+                    <p>Your resume contains the LinkedIn information: <strong>{linkedin}</strong></p>
+                  )}
+                </div>
+              )}
             </div>
           )}
           {activeTab === "job" && (
             <div className="job-content">
               <h3>Job Description</h3>
-              <pre>{highlightKeywords(scannedJobDescription, matchingjdre)}</pre>
+              <pre>{highlightKeywords(scannedJobDescription, matchingjdre, keywordsjd)}</pre>
             </div>
           )}
         </div>
