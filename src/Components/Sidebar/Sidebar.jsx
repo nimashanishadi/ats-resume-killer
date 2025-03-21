@@ -9,7 +9,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="logo">Your Logo</div>
       <ul className="nav-list">
-        <li onClick={() => navigate("/dashboard")}>Dashboard</li>
+        <li onClick={() => navigate("/")}>New Scan</li>
         <li onClick={() => navigate("/job-scans")}>Job Scans</li>
         <li onClick={() => navigate("/resumes")}>Resumes</li>
         <li className="new-scan" onClick={() => navigate("/new-scan")}>+ New Scan</li>

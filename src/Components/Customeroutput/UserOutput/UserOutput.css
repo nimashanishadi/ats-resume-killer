@@ -1,76 +1,69 @@
-.user-output-container {
-  width: 80%;
-  max-width: 1000px;
-  margin: auto;
-  text-align: center;
-  font-family: Arial, sans-serif;
-}
-
-.tabs {
+/* Ensure main layout is side by side */
+.container {
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  flex-direction: row;
+  height: 100vh;
 }
 
-.tabs button {
-  padding: 10px 20px;
-  margin: 0 5px;
-  border: none;
-  background-color: #ddd;
-  cursor: pointer;
+/* Sidebar styling */
+.sidebar {
+  width: 250px; /* Adjust based on your sidebar width */
+  min-height: 100vh;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
+
+/* Main content next to sidebar */
+.user-output-content {
+  flex: 1; /* Takes up the remaining space */
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure job description and resume text are displayed correctly */
+.tab-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Skills Table */
+.skills-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: #fff;
+}
+
+.skills-table th,
+.skills-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
   font-size: 16px;
 }
 
-.tabs button.active {
-  background-color: #007bff;
-  color: white;
+.skills-table th {
+  background-color: #f8f9fa;
   font-weight: bold;
 }
 
-.tab-content {
-  border: 1px solid #ccc;
-  padding: 20px;
-  background-color: #f9f9f9;
-  min-height: 150px;
-  max-width: 100%;
-  margin: auto;
+.skills-table tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
-pre {
-  text-align: left;
-  background: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  overflow-x: auto;
-  max-width: 100%;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+/* Green check and red cross styling */
+.green-check {
+  color: green;
+  font-size: 18px;
 }
 
-button {
-  padding: 10px 15px;
-  margin-top: 20px;
-  border: none;
-  background-color: #28a745;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #218838;
-}
-
-.container {
-  display: flex;
-}
-
-.user-output-content {
-  flex: 1;
-  padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
+.red-cross {
+  color: red;
+  font-size: 18px;
 }
 
 /* Contact Section */
@@ -83,47 +76,44 @@ button:hover {
   text-align: left;
 }
 
-.contact-section h3 {
-  color: #28a745;
-  margin-bottom: 5px;
+/* Tabs for Resume & Job Description */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
-.contact-section p {
+.tabs button {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
   font-size: 16px;
-  font-weight: bold;
+  background-color: #ddd;
+  border-radius: 5px;
 }
 
-/* Job Content */
-.job-content {
-  max-width: 80%;
-  margin: auto;
+.tabs button.active {
+  background-color: #007bff;
+  color: white;
 }
 
-/* Green highlight for matching keywords */
+/* Preformatted text for readability */
+pre {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Highlighting job description keywords */
 .highlight-keyword-green {
   color: green;
   font-weight: bold;
-  background-color: #e6f7e6;
-  padding: 2px 4px;
-  border-radius: 3px;
 }
 
-/* Red highlight for non-matching keywords */
 .highlight-keyword-red {
   color: red;
   font-weight: bold;
-  background-color: #fdd;
-  padding: 2px 4px;
-  border-radius: 3px;
-}
-
-/* LinkedIn Link */
-.contact-section a {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.contact-section a:hover {
-  text-decoration: underline;
 }
