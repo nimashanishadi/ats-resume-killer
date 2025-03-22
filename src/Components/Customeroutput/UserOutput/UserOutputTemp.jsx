@@ -19,6 +19,7 @@ const UserOutput = () => {
     keywordsre, // Resume Keywords
     softskillsjd, // Job Description Soft Skills
     softskillsre, // Resume Soft Skills
+    missingKeywords,
   } = useSelector((state) => state.userInput);
 
   const navigate = useNavigate();
@@ -114,25 +115,43 @@ const UserOutput = () => {
     );
   };
 
+  // Function to highlight matching jdre in the extracted resume text
+  const highlightMatchingJDRE = (text) => {
+    if (!text) return "";
+
+    let highlightedText = text;
+
+    // Loop through each term in matchingjdre and highlight them in green
+    matchingjdre.forEach((term) => {
+      const regex = new RegExp(`\\b${term}\\b`, "gi"); // Case-insensitive matching
+      highlightedText = highlightedText.replace(regex, (match) =>
+        `<span class="highlight-keyword-green">${match}</span>`
+      );
+    });
+
+    return <span dangerouslySetInnerHTML={{ __html: highlightedText }} />;
+  };
+
   // Function to highlight keywords in job description
   const highlightJobDescription = (text) => {
     if (!text) return "";
-    return text.split(" ").map((word, index) => {
-      if (matchingjdre.includes(word)) {
-        return (
-          <span key={index} className="highlight-keyword-green">
-            {word}{" "}
-          </span>
+
+    let highlightedText = text;
+
+    // Function to wrap matched words/phrases with span
+    const highlightWords = (words, className) => {
+      words.forEach((phrase) => {
+        const regex = new RegExp(`\\b${phrase}\\b`, "gi"); // Case-insensitive matching
+        highlightedText = highlightedText.replace(regex, (match) =>
+          `<span class="${className}">${match}</span>`
         );
-      } else if (keywordsjd.includes(word)) {
-        return (
-          <span key={index} className="highlight-keyword-red">
-            {word}{" "}
-          </span>
-        );
-      }
-      return word + " ";
-    });
+      });
+    };
+
+    highlightWords(matchingjdre, "highlight-keyword-green");
+    highlightWords(missingKeywords, "highlight-keyword-red");
+
+    return <span dangerouslySetInnerHTML={{ __html: highlightedText }} />;
   };
 
   // Calculate the percentage of matching hard skills
@@ -145,11 +164,42 @@ const UserOutput = () => {
     100
   ).toFixed(2); // Rounded to 2 decimal places
 
+  // Calculate the percentage of matching soft skills
+  const matchingSoftSkills = softskillsjd.filter((skill) =>
+    softskillsre.includes(skill)
+  ).length;
+
+  const matchingSoftSkillsPercentage = (
+    (matchingSoftSkills / softskillsjd.length) *
+    100
+  ).toFixed(2);
+
+  // Calculate the percentage of matching keywords
+  const matchingKeywords = keywordsjd.filter((keyword) =>
+    keywordsre.includes(keyword)
+  ).length;
+
+  const matchingKeywordsPercentage = (
+    (matchingKeywords / keywordsjd.length) *
+    100
+  ).toFixed(2);
+
+  // Calculate overall score by considering all matching words (no duplicates)
+  const uniqueMatchingWords = new Set([
+    ...hardskillsjd.filter((skill) => hardskillsre.includes(skill)),
+    ...softskillsjd.filter((skill) => softskillsre.includes(skill)),
+    ...keywordsjd.filter((keyword) => keywordsre.includes(keyword)),
+  ]);
+
+  const overallScore = ((uniqueMatchingWords.size /
+    (hardskillsjd.length + softskillsjd.length + keywordsjd.length)) * 100).toFixed(2);
+
   return (
     <div className="container">
       <Sidebar />
       <div className="user-output-content">
         <h2>Scan Result</h2>
+        <h3>Overall Matching Score: {overallScore}%</h3>
         <div className="tabs">
           <button
             className={activeTab === "resume" ? "active" : ""}
@@ -167,10 +217,13 @@ const UserOutput = () => {
         <div className="tab-content">
           {activeTab === "resume" && (
             <div>
-              {/* <h3>Extracted Resume Text</h3>// remove showing the extraction of resume
-              <pre>{extractedResumeText}</pre> */}
+              {/* Personal Information Section */}
+              <div className="contact-section">
+                <p>
+                  These are the personal details found on your resume through our ATS (Applicant Tracking System) scan. They help in ensuring your contact information is correctly presented.
+                </p>
+              </div>
 
-              {/* Contact Details */}
               {phone && (
                 <div className="contact-section">
                   <h3>📞 Phone Number</h3>
@@ -217,17 +270,27 @@ const UserOutput = () => {
                 {renderSkillsTable()}
               </div>
 
-              {/* Soft Skills Table */}
+              {/* Displaying the Percentage of Matching Soft Skills */}
               <div className="contact-section">
                 <h3>💡 Soft Skills Comparison</h3>
+                <p>
+                  Out of {softskillsjd.length} soft skills in the job description, you have {matchingSoftSkills} matching skills in your resume. This is {matchingSoftSkillsPercentage}% of the required skills.
+                </p>
                 {renderSoftSkillsTable()}
               </div>
 
-              {/* Keywords Table */}
+              {/* Displaying the Percentage of Matching Keywords */}
               <div className="contact-section">
                 <h3>💡 Keywords Comparison</h3>
+                <p>
+                  Out of {keywordsjd.length} keywords in the job description, you have {matchingKeywords} matching keywords in your resume. Try to add more keywords from here.
+                </p>
                 {renderKeywordsTable()}
               </div>
+
+              {/* Extracted Resume Text at the End */}
+              <h3>Extracted Resume Text</h3>
+              <pre>{highlightMatchingJDRE(extractedResumeText)}</pre>
             </div>
           )}
           {activeTab === "job" && (

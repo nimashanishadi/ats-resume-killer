@@ -1,45 +1,92 @@
+/* Sidebar container */
 .sidebar {
-    width: 250px;
-    height: 100vh;
-    background-color: #f8f9fa;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(135deg, #f0f0f0, #d8d8d8); /* Light gradient background */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  color: #333; /* Darker text for better contrast */
+}
+
+/* Logo Styling */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 1px;
+  color: #333; /* Dark text for visibility */
+}
+
+/* Navigation List */
+.nav-list {
+  list-style-type: none;
+  padding: 0;
+  flex-grow: 1; /* Allow the list to grow */
+}
+
+.nav-list li {
+  padding: 12px 20px;
+  margin: 10px 0;
+  cursor: pointer;
+  background-color: #f8f9fa; /* Light background for nav items */
+  border-radius: 8px;
+  text-align: center;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #333; /* Darker text color for readability */
+}
+
+/* Hover effect for nav items */
+.nav-list li:hover {
+  background-color: #e0e0e0; /* Light gray hover effect */
+  color: #007bff; /* Blue color on hover for the text */
+}
+
+/* Active navigation item */
+.nav-list li.active {
+  background-color: #007bff; /* Blue background for active item */
+  color: white;
+}
+
+/* 'New Scan' button styling */
+.new-scan {
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin-top: 15px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.new-scan:hover {
+  background-color: #218838;
+}
+
+/* Adjustments for mobile responsiveness */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
   }
-  
+
   .logo {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 22px;
     margin-bottom: 20px;
   }
-  
-  .nav-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
+
   .nav-list li {
+    font-size: 14px;
     padding: 10px 15px;
-    margin: 5px 0;
-    cursor: pointer;
-    background-color: #e9ecef;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 16px;
   }
-  
-  .nav-list li:hover {
-    background-color: #007bff;
-    color: white;
-  }
-  
+
   .new-scan {
-    background-color: #28a745;
-    color: white;
+    font-size: 14px;
+    padding: 10px 15px;
   }
-  
-  .new-scan:hover {
-    background-color: #218838;
-  }
-  
+}

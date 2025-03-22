@@ -217,7 +217,13 @@ const UserOutput = () => {
         <div className="tab-content">
           {activeTab === "resume" && (
             <div>
-              {/* Contact Details */}
+              {/* Personal Information Section */}
+              <div className="contact-section">
+                <p>
+                  These are the personal details found on your resume through our ATS (Applicant Tracking System) scan. They help in ensuring your contact information is correctly presented.
+                </p>
+              </div>
+
               {phone && (
                 <div className="contact-section">
                   <h3>📞 Phone Number</h3>
