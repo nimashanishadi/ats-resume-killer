@@ -1,0 +1,119 @@
+/* Ensure main layout is side by side */
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+/* Sidebar styling */
+.sidebar {
+  width: 250px; /* Adjust based on your sidebar width */
+  min-height: 100vh;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
+
+/* Main content next to sidebar */
+.user-output-content {
+  flex: 1; /* Takes up the remaining space */
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure job description and resume text are displayed correctly */
+.tab-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Skills Table */
+.skills-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: #fff;
+}
+
+.skills-table th,
+.skills-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.skills-table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.skills-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Green check and red cross styling */
+.green-check {
+  color: green;
+  font-size: 18px;
+}
+
+.red-cross {
+  color: red;
+  font-size: 18px;
+}
+
+/* Contact Section */
+.contact-section {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  background-color: #e6f7e6;
+  border-radius: 5px;
+  text-align: left;
+}
+
+/* Tabs for Resume & Job Description */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tabs button {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+.tabs button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Preformatted text for readability */
+pre {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Highlighting job description keywords */
+.highlight-keyword-green {
+  color: green;
+  font-weight: bold;
+}
+
+.highlight-keyword-red {
+  color: red;
+  font-weight: bold;
+}

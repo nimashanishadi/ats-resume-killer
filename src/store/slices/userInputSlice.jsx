@@ -19,6 +19,7 @@ const initialState = {
   noofSoftskillsjd: 0,
   phone: "",
   hardskillsre: [],
+  missingKeywords: [],
   keywordsre: [],
   noofSoftskillsre: 0,
   email: ""
