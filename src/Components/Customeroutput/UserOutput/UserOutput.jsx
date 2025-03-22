@@ -115,25 +115,42 @@ const UserOutput = () => {
     );
   };
 
+  // Function to highlight matching jdre in the extracted resume text
+  const highlightMatchingJDRE = (text) => {
+    if (!text) return "";
+
+    let highlightedText = text;
+
+    // Loop through each term in matchingjdre and highlight them in green
+    matchingjdre.forEach((term) => {
+      const regex = new RegExp(`\\b${term}\\b`, "gi"); // Case-insensitive matching
+      highlightedText = highlightedText.replace(regex, (match) =>
+        `<span class="highlight-keyword-green">${match}</span>`
+      );
+    });
+
+    return <span dangerouslySetInnerHTML={{ __html: highlightedText }} />;
+  };
+
   // Function to highlight keywords in job description
   const highlightJobDescription = (text) => {
     if (!text) return "";
-  
+
     let highlightedText = text;
-  
+
     // Function to wrap matched words/phrases with span
     const highlightWords = (words, className) => {
       words.forEach((phrase) => {
         const regex = new RegExp(`\\b${phrase}\\b`, "gi"); // Case-insensitive matching
-        highlightedText = highlightedText.replace(regex, (match) => 
+        highlightedText = highlightedText.replace(regex, (match) =>
           `<span class="${className}">${match}</span>`
         );
       });
     };
-  
+
     highlightWords(matchingjdre, "highlight-keyword-green");
     highlightWords(missingKeywords, "highlight-keyword-red");
-  
+
     return <span dangerouslySetInnerHTML={{ __html: highlightedText }} />;
   };
 
@@ -174,7 +191,7 @@ const UserOutput = () => {
     ...keywordsjd.filter((keyword) => keywordsre.includes(keyword)),
   ]);
 
-  const overallScore = ((uniqueMatchingWords.size / 
+  const overallScore = ((uniqueMatchingWords.size /
     (hardskillsjd.length + softskillsjd.length + keywordsjd.length)) * 100).toFixed(2);
 
   return (
@@ -267,7 +284,7 @@ const UserOutput = () => {
 
               {/* Extracted Resume Text at the End */}
               <h3>Extracted Resume Text</h3>
-              <pre>{extractedResumeText}</pre>
+              <pre>{highlightMatchingJDRE(extractedResumeText)}</pre>
             </div>
           )}
           {activeTab === "job" && (
