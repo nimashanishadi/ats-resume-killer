@@ -117,3 +117,10 @@ pre {
   color: red;
   font-weight: bold;
 }
+
+.highlight-keyword-green {
+  background-color: green;
+  color: white;
+  padding: 0 5px;
+  border-radius: 3px;
+}

@@ -78,29 +78,30 @@ p {
 /* Tabs for Resume & Job Description */
 .tabs {
   display: flex;
-  gap: 15px;
-  margin-bottom: 25px;
+  width: 100%;
+  border-bottom: 2px solid #000; /* Dark bottom border */
 }
 
 .tabs button {
+  flex: 1;
   padding: 12px 20px;
-  font-size: 16px;
-  background-color: #ddd;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  font-size: 18px;
+  background-color: #f8fbfd; /* Light background */
+  border: none;
+  outline: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-weight: bold;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .tabs button.active {
-  background-color: #007bff;
-  color: white;
+  background-color: #dee2e6; /* Active tab color */
+  color: #333;
+  font-weight: bold;
+  border-bottom: 2px solid #000; /* Connect active tab with bottom line */
 }
 
 .tabs button:hover {
-  background-color: #00d2ff;
-  color: white;
+  background-color: #e9ecef;
 }
 
 /* Table Styles */
