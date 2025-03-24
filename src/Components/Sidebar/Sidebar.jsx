@@ -12,6 +12,7 @@ const Sidebar = () => {
         <li onClick={() => navigate("/")}>New Scan</li>
         <li onClick={() => navigate("/job-scans")}>Job Scans</li>
         <li onClick={() => navigate("/resumes")}>Resumes</li>
+        <li onClick={() => navigate("/pricing")}>Pricing & Plans</li>
         <li className="new-scan" onClick={() => navigate("/new-scan")}>+ New Scan</li>
       </ul>
     </div>

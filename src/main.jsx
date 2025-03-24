@@ -11,6 +11,7 @@ import ScanResult from './pages/ScanResult.jsx';
 import UserOutput from './Components/Customeroutput/UserOutput/UserOutput.jsx';
 import { Provider } from 'react-redux';  // Import Provider
 import Store from './store/store';  // Import the store
+import Pricing from "./../src/Components/pricing/pricing.jsx";
 
 // Set up your router
 const router = createBrowserRouter([
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: "/user-output",
     element: <UserOutput />,
+  },
+  {
+    path: "/pricing",
+    element: <Pricing />,
   },
 ]);
 
