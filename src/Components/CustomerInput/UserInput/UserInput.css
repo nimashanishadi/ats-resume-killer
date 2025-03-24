@@ -366,3 +366,25 @@ pre {
   font-size: 16px;
   color: #333;
 }
+
+
+.loading-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;  /* Adjust width of the pop-up */
+  height: 200px;  /* Adjust height of the pop-up */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-container {
+  width: 100%;
+}

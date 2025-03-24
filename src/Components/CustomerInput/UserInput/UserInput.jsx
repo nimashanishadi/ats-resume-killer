@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setResumeFile, setJobDescription, setScanResult } from "../../../store/slices/userInputSlice";
 import { useNavigate } from "react-router-dom"; 
-import axios from "axios";  // 🔹 Import axios
+import axios from "axios";  
 import "./UserInput.css";
 
 const UserInput = () => {
@@ -10,7 +10,9 @@ const UserInput = () => {
   const navigate = useNavigate();  
   const { resumeFileName, jobDescription } = useSelector((state) => state.userInput);
   const [resumeFile, setResumeFileState] = useState(null);
-  const [loading, setLoading] = useState(false);  // 🔹 New loading state
+  const [loading, setLoading] = useState(false);  
+  const [progress, setProgress] = useState(0);  
+  const [loadingMessage, setLoadingMessage] = useState("Uploading resume...");
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -28,13 +30,32 @@ const UserInput = () => {
       return;
     }
 
-    setLoading(true);  // 🔹 Show loading before sending request
+    setLoading(true);  
+    let progressValue = 0;
 
     const formData = new FormData();
     formData.append("resume", resumeFile);
     formData.append("jobDescription", jobDescription);
 
     try {
+      // Simulating progress with setInterval for demonstration
+      const interval = setInterval(() => {
+        progressValue += 10;
+        setProgress(progressValue);
+
+        if (progressValue < 50) {
+          setLoadingMessage("Uploading resume...");
+        } else if (progressValue < 80) {
+          setLoadingMessage("Analyzing and making results...");
+        } else {
+          setLoadingMessage("Finalizing...");
+        }
+
+        if (progressValue >= 100) {
+          clearInterval(interval);
+        }
+      }, 500); // Increment the progress by 10% every 500ms
+
       // 🔹 Use axios to send a POST request
       const response = await axios.post("http://localhost:8080/api/scan", formData, {
         headers: {
@@ -42,18 +63,20 @@ const UserInput = () => {
         },
       });
 
-      // Assuming the response is of type Mono<Map<String, Object>> which will be a JSON object
-      if (response.status === 200) {
-        dispatch(setScanResult(response.data));  // Dispatch the response data to Redux
-        setLoading(false);  // 🔹 Hide loading
-        navigate("/user-output");  // 🔹 Navigate after receiving response
-      } else {
-        throw new Error("Server error");
-      }
+      // Simulate completion after loading progress reaches 100%
+      setTimeout(() => {
+        if (response.status === 200) {
+          dispatch(setScanResult(response.data));  
+          setLoading(false);  
+          navigate("/user-output");  
+        } else {
+          throw new Error("Server error");
+        }
+      }, 1000);  // Delay the response handling to allow finalization message to display
 
     } catch (error) {
       console.error("Error uploading file:", error);
-      setLoading(false);  // 🔹 Hide loading in case of error
+      setLoading(false);  
     }
   };
 
@@ -84,11 +107,15 @@ const UserInput = () => {
         </button>
       </div>
 
-      {/* 🔹 Show loading spinner */}
+      {/* Only show the progress bar pop-up during loading */}
       {loading && (
-        <div className="loading-spinner">
-          <div className="spinner"></div>
-          <p>Processing, please wait...</p>
+        <div className="loading-popup">
+          <div className="loading-container">
+            <p>{loadingMessage}</p>
+            <div className="progress-bar">
+              <div className="progress" style={{ width: `${progress}%` }}></div>
+            </div>
+          </div>
         </div>
       )}
     </div>
