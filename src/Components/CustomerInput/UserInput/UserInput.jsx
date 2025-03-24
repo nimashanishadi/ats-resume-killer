@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setResumeFile, setJobDescription, setScanResult } from "../../../store/slices/userInputSlice";
 import { useNavigate } from "react-router-dom"; 
+import axios from "axios";  // 🔹 Import axios
 import "./UserInput.css";
 
 const UserInput = () => {
@@ -34,20 +35,21 @@ const UserInput = () => {
     formData.append("jobDescription", jobDescription);
 
     try {
-      const response = await fetch("http://localhost:8080/api/scan", {
-        method: "POST",
-        body: formData,
+      // 🔹 Use axios to send a POST request
+      const response = await axios.post("http://localhost:8080/api/scan", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
-      if (!response.ok) {
+      // Assuming the response is of type Mono<Map<String, Object>> which will be a JSON object
+      if (response.status === 200) {
+        dispatch(setScanResult(response.data));  // Dispatch the response data to Redux
+        setLoading(false);  // 🔹 Hide loading
+        navigate("/user-output");  // 🔹 Navigate after receiving response
+      } else {
         throw new Error("Server error");
       }
-
-      const data = await response.json();
-      dispatch(setScanResult(data));  
-
-      setLoading(false);  // 🔹 Hide loading
-      navigate("/user-output"); // 🔹 Navigate after receiving response
 
     } catch (error) {
       console.error("Error uploading file:", error);
