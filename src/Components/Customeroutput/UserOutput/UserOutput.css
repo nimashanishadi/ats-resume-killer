@@ -1,3 +1,8 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+
+
 /* Global styles */
 body {
   font-family: 'Roboto', sans-serif;
@@ -49,18 +54,34 @@ body {
   flex: 1;
   padding: 30px;
   overflow-y: auto;
-  background-color: #ffffff;
+  background-color: #f9f9f9; /* Light gray background same as sidebar */
   display: flex;
   flex-direction: column;
   border-left: 1px solid #ddd;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  margin-left: 250px; /* Makes space for the sidebar */
 }
 
-h2 {
-  color: #333;
-  font-size: 28px;
-  margin-bottom: 15px;
+
+.contact-section.white-background {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  margin-top: 20px;
 }
+
+
+
+
+h2 {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+
 
 h3 {
   color: #444;
@@ -105,36 +126,63 @@ p {
 }
 
 /* Table Styles */
+/* Modern Table Styling */
 .skills-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
   background-color: #ffffff;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.skills-table th,
-.skills-table td {
-  padding: 15px;
-  text-align: center;
-  font-size: 16px;
-  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .skills-table th {
-  background-color: #f1f1f1;
-  color: #555;
-  font-weight: bold;
+  background: linear-gradient(135deg, #e0e0e0, #cfcfcf);
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  padding: 14px 20px;
+  text-transform: uppercase;
+}
+
+.skills-table td {
+  padding: 14px 20px;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+  color: #333;
 }
 
 .skills-table tr:nth-child(even) {
-  background-color: #fafafa;
+  background-color: #f8fbfd;
 }
 
 .skills-table tr:hover {
-  background-color: #f1f1f1;
-  cursor: pointer;
+  background-color: #eef5ff;
+  transition: background 0.3s ease;
 }
+
+.skills-table td .green-check {
+  color: #28a745;
+  font-size: 20px;
+}
+
+.skills-table td .red-cross {
+  color: #dc3545;
+  font-size: 20px;
+}
+
+/* Make the table responsive */
+@media (max-width: 768px) {
+  .skills-table {
+    font-size: 14px;
+  }
+}
+
+
+
+
+
 
 .green-check {
   color: #28a745;
@@ -215,9 +263,6 @@ pre {
     margin: 5px 0;
   }
 
-  .user-output-content {
-    padding: 20px;
-  }
 
   .tabs {
     flex-direction: column;
@@ -236,3 +281,91 @@ pre {
     font-size: 13px;
   }
 }
+
+.contact-section.white-background {
+  background-color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  margin-top: 15px;
+}
+
+.contact-header {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+  margin-bottom: 3px;
+}
+
+.contact-icon {
+  font-size: 14px; /* Smaller icon */
+}
+
+.contact-section.white-background h3 {
+  font-size: 14px; /* Smaller font for label */
+  font-weight: 600;
+  margin: 0;
+  color: #007bff;
+}
+
+.contact-section.white-background p {
+  font-size: 14px;
+  color: #444;
+  margin: 0;
+  padding-left: 22px; /* Aligns text to the start */
+}
+
+
+
+
+
+/* Styling for Extracted Resume Text Section */
+.resume-section {
+  margin-top: 30px;
+  padding: 20px;
+  background: #ffffff; /* White background */
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+
+.resume-section h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333; /* Dark gray for better readability */
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #cfcfcf; /* Subtle separator */
+  padding-bottom: 6px;
+}
+
+.resume-section pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 16px;
+  color: #444; /* Slightly darker gray */
+  background: #ffffff; /* Slight contrast for text block */
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+  border-left: 4px solid #cfcfcf; /* Stylish left highlight */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .resume-section {
+    padding: 15px;
+  }
+  
+  .resume-section h3 {
+    font-size: 18px;
+  }
+  
+  .resume-section pre {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+

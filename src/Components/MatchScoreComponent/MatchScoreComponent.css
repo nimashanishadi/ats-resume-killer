@@ -1,0 +1,60 @@
+.match-score-container {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .circle-progress {
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+  }
+  
+  .circular-chart {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .circle-bg {
+    fill: none;
+    stroke: #f3f3f3;
+    stroke-width: 3.8;
+  }
+  
+  .circle {
+    fill: none;
+    stroke: #f39c12;
+    stroke-width: 3.8;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    transition: stroke-dasharray 0.6s ease-in-out;
+  }
+  
+  .percentage-text {
+    font-size: 8px;
+    font-weight: bold;
+    fill: #f39c12;
+    text-anchor: middle;
+    dominant-baseline: central;
+  }
+  
+  .match-score-text {
+    flex: 1;
+  }
+  
+  .match-score-text h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .match-score-text p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #666;
+  }
+  

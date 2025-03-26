@@ -1,0 +1,87 @@
+/* Sidebar container */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #111827; /* Dark background */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    color: #fff; /* White text */
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo Styling */
+  .logo {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-align: left;
+    padding-left: 10px;
+    color: #fff;
+  }
+  
+  /* Navigation List */
+  .nav-list {
+    list-style-type: none;
+    padding: 0;
+    flex-grow: 1;
+  }
+  
+  .nav-list li {
+    padding: 12px 15px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background 0.3s ease, color 0.3s ease;
+    color: #9ca3af; /* Light gray text */
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-list li:hover {
+    background: #1f2937; /* Slightly lighter background */
+    color: #fff;
+  }
+  
+  .nav-list li.active {
+    background: #2563eb; /* Blue background for active item */
+    color: #fff;
+  }
+  
+  /* Upgrade button */
+  .upgrade-btn {
+    background: #2563eb; /* Blue color */
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .upgrade-btn:hover {
+    background: #1d4ed8; /* Darker blue on hover */
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      padding: 15px;
+    }
+  
+    .logo {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+  
+    .nav-list li {
+      font-size: 14px;
+      padding: 10px 15px;
+    }
+  }
+  

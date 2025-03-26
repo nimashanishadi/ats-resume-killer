@@ -1,126 +1,371 @@
-/* Ensure main layout is side by side */
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+
+
+/* Global styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f9;
+  color: #333;
+}
+
 .container {
   display: flex;
   flex-direction: row;
   height: 100vh;
+  background-color: #f9f9f9;
 }
 
-/* Sidebar styling */
+/* Sidebar Styling */
 .sidebar {
-  width: 250px; /* Adjust based on your sidebar width */
+  width: 250px;
   min-height: 100vh;
-  background-color: #333;
+  background: linear-gradient(135deg, #007bff, #00d2ff);
   color: white;
   padding: 20px;
-}
-
-/* Main content next to sidebar */
-.user-output-content {
-  flex: 1; /* Takes up the remaining space */
-  padding: 20px;
-  overflow-y: auto;
-  background-color: #f9f9f9;
+  box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-/* Ensure job description and resume text are displayed correctly */
-.tab-content {
+.sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 10px 0;
+  transition: color 0.3s ease;
+}
+
+.sidebar a:hover {
+  color: #ffd700;
+}
+
+/* Main Content */
+.user-output-content {
   flex: 1;
+  padding: 30px;
   overflow-y: auto;
+  background-color: #f9f9f9; /* Light gray background same as sidebar */
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #ddd;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  margin-left: 250px; /* Makes space for the sidebar */
 }
 
-/* Skills Table */
+
+.contact-section.white-background {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  margin-top: 20px;
+}
+
+
+
+
+h2 {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+
+
+h3 {
+  color: #444;
+  font-size: 22px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Tabs for Resume & Job Description */
+.tabs {
+  display: flex;
+  width: 100%;
+  border-bottom: 2px solid #000; /* Dark bottom border */
+}
+
+.tabs button {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 18px;
+  background-color: #f8fbfd; /* Light background */
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.tabs button.active {
+  background-color: #dee2e6; /* Active tab color */
+  color: #333;
+  font-weight: bold;
+  border-bottom: 2px solid #000; /* Connect active tab with bottom line */
+}
+
+.tabs button:hover {
+  background-color: #e9ecef;
+}
+
+/* Table Styles */
+/* Modern Table Styling */
 .skills-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
-  background-color: #fff;
-}
-
-.skills-table th,
-.skills-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-  font-size: 16px;
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .skills-table th {
-  background-color: #f8f9fa;
-  font-weight: bold;
+  background: linear-gradient(135deg, #e0e0e0, #cfcfcf);
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  padding: 14px 20px;
+  text-transform: uppercase;
+}
+
+.skills-table td {
+  padding: 14px 20px;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+  color: #333;
 }
 
 .skills-table tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #f8fbfd;
 }
 
-/* Green check and red cross styling */
+.skills-table tr:hover {
+  background-color: #eef5ff;
+  transition: background 0.3s ease;
+}
+
+.skills-table td .green-check {
+  color: #28a745;
+  font-size: 20px;
+}
+
+.skills-table td .red-cross {
+  color: #dc3545;
+  font-size: 20px;
+}
+
+/* Make the table responsive */
+@media (max-width: 768px) {
+  .skills-table {
+    font-size: 14px;
+  }
+}
+
+
+
+
+
+
 .green-check {
-  color: green;
+  color: #28a745;
   font-size: 18px;
 }
 
 .red-cross {
-  color: red;
+  color: #dc3545;
   font-size: 18px;
 }
 
 /* Contact Section */
 .contact-section {
   margin-top: 20px;
-  padding: 15px;
-  border: 1px solid #ccc;
-  background-color: #e6f7e6;
-  border-radius: 5px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
 
-/* Tabs for Resume & Job Description */
-.tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+.contact-section h3 {
+  font-size: 18px;
+  color: #007bff;
 }
 
-.tabs button {
-  padding: 10px 15px;
-  border: none;
-  cursor: pointer;
+.contact-section p {
   font-size: 16px;
-  background-color: #ddd;
-  border-radius: 5px;
+  color: #555;
+  margin-top: 10px;
 }
 
-.tabs button.active {
-  background-color: #007bff;
-  color: white;
-}
-
-/* Preformatted text for readability */
-pre {
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-/* Highlighting job description keywords */
+/* Highlighting Resume/Job Description Keywords */
 .highlight-keyword-green {
-  color: green;
-  font-weight: bold;
-}
-
-.highlight-keyword-red {
-  color: red;
-  font-weight: bold;
-}
-
-.highlight-keyword-green {
-  background-color: green;
+  background-color: #28a745;
   color: white;
   padding: 0 5px;
   border-radius: 3px;
 }
+
+.highlight-keyword-red {
+  background-color: #dc3545;
+  color: white;
+  padding: 0 5px;
+  border-radius: 3px;
+}
+
+/* Preformatted text */
+pre {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  margin-top: 20px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff;
+    text-align: center;
+  }
+
+  .sidebar a {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+
+
+  .tabs {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .skills-table {
+    font-size: 14px;
+  }
+
+  .contact-section {
+    padding: 15px;
+  }
+
+  pre {
+    font-size: 13px;
+  }
+}
+
+.contact-section.white-background {
+  background-color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  margin-top: 15px;
+}
+
+.contact-header {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+  margin-bottom: 3px;
+}
+
+.contact-icon {
+  font-size: 14px; /* Smaller icon */
+}
+
+.contact-section.white-background h3 {
+  font-size: 14px; /* Smaller font for label */
+  font-weight: 600;
+  margin: 0;
+  color: #007bff;
+}
+
+.contact-section.white-background p {
+  font-size: 14px;
+  color: #444;
+  margin: 0;
+  padding-left: 22px; /* Aligns text to the start */
+}
+
+
+
+
+
+/* Styling for Extracted Resume Text Section */
+.resume-section {
+  margin-top: 30px;
+  padding: 20px;
+  background: #ffffff; /* White background */
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+
+.resume-section h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333; /* Dark gray for better readability */
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #cfcfcf; /* Subtle separator */
+  padding-bottom: 6px;
+}
+
+.resume-section pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 16px;
+  color: #444; /* Slightly darker gray */
+  background: #ffffff; /* Slight contrast for text block */
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+  border-left: 4px solid #cfcfcf; /* Stylish left highlight */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .resume-section {
+    padding: 15px;
+  }
+  
+  .resume-section h3 {
+    font-size: 18px;
+  }
+  
+  .resume-section pre {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+

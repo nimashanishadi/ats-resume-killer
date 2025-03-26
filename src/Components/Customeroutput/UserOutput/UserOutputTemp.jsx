@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./UserOutput.css";
 import Sidebar from "./../../Sidebar/Sidebar";
+import MatchScoreComponent from "./../../../Components/MatchScoreComponent/MatchScoreComponent";
 
 const UserOutput = () => {
   const {
@@ -198,8 +199,8 @@ const UserOutput = () => {
     <div className="container">
       <Sidebar />
       <div className="user-output-content">
-        <h2>Scan Result</h2>
-        <h3>Overall Matching Score: {overallScore}%</h3>
+        <h2>Here is your Resume Scan Result</h2>
+        <MatchScoreComponent overallScore={overallScore} />
         <div className="tabs">
           <button
             className={activeTab === "resume" ? "active" : ""}
@@ -218,35 +219,39 @@ const UserOutput = () => {
           {activeTab === "resume" && (
             <div>
               {/* Personal Information Section */}
-              <div className="contact-section">
+              <div className="contact-section white-background">
                 <p>
                   These are the personal details found on your resume through our ATS (Applicant Tracking System) scan. They help in ensuring your contact information is correctly presented.
                 </p>
               </div>
 
               {phone && (
-                <div className="contact-section">
-                  <h3>📞 Phone Number</h3>
-                  <p>Your resume shows you have <strong>{phone}</strong> as your contact phone number.</p>
-                </div>
-              )}
+                  <div className="contact-section white-background">
+                    <div className="contact-header">
+                      <span className="contact-icon">📞</span>
+                      <h3>Phone Number</h3>
+                    </div>
+                    <p>Your resume shows you have <strong>{phone}</strong> as your contact phone number.</p>
+                  </div>
+                )}
+
 
               {email && (
-                <div className="contact-section">
+                <div className="contact-section white-background">
                   <h3>📧 Email</h3>
                   <p>Your resume shows you have <strong>{email}</strong> as your contact email address.</p>
                 </div>
               )}
 
               {address && (
-                <div className="contact-section">
+                <div className="contact-section white-background">
                   <h3>🏠 Address</h3>
                   <p>Your resume shows your address as: <strong>{address}</strong>.</p>
                 </div>
               )}
 
               {linkedin && (
-                <div className="contact-section">
+                <div className="contact-section white-background">
                   <h3>🔗 LinkedIn Profile</h3>
                   {linkedin.startsWith("http") ? (
                     <p>
@@ -265,7 +270,7 @@ const UserOutput = () => {
               <div className="contact-section">
                 <h3>💡 Skills Comparison</h3>
                 <p>
-                  Out of {hardskillsjd.length} hard skills in the job description, you have {matchingHardSkills} matching skills in your resume. This is {matchingPercentage}% of the required skills.
+                  Out of <strong>{hardskillsjd.length}</strong> hard skills in the job description, you have <strong>{matchingHardSkills}</strong> matching skills in your resume. This is {matchingPercentage}% of the required skills.
                 </p>
                 {renderSkillsTable()}
               </div>
@@ -274,7 +279,7 @@ const UserOutput = () => {
               <div className="contact-section">
                 <h3>💡 Soft Skills Comparison</h3>
                 <p>
-                  Out of {softskillsjd.length} soft skills in the job description, you have {matchingSoftSkills} matching skills in your resume. This is {matchingSoftSkillsPercentage}% of the required skills.
+                  Out of <strong>{softskillsjd.length}</strong> soft skills in the job description, you have <strong>{matchingSoftSkills}</strong> matching skills in your resume. This is {matchingSoftSkillsPercentage}% of the required skills.
                 </p>
                 {renderSoftSkillsTable()}
               </div>
@@ -283,14 +288,16 @@ const UserOutput = () => {
               <div className="contact-section">
                 <h3>💡 Keywords Comparison</h3>
                 <p>
-                  Out of {keywordsjd.length} keywords in the job description, you have {matchingKeywords} matching keywords in your resume. Try to add more keywords from here.
+                  Out of <strong>{keywordsjd.length}</strong> keywords in the job description, you have <strong>{matchingKeywords}</strong> matching keywords in your resume. Try to add more keywords from here.
                 </p>
                 {renderKeywordsTable()}
               </div>
 
               {/* Extracted Resume Text at the End */}
-              <h3>Extracted Resume Text</h3>
-              <pre>{highlightMatchingJDRE(extractedResumeText)}</pre>
+              <div className="resume-section">
+                <h3>Extracted Resume Text</h3>
+                <pre>{highlightMatchingJDRE(extractedResumeText)}</pre>
+              </div>
             </div>
           )}
           {activeTab === "job" && (
