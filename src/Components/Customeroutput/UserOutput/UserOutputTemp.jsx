@@ -5,6 +5,9 @@ import "./UserOutput.css";
 import Sidebar from "./../../Sidebar/Sidebar";
 import MatchScoreComponent from "./../../../Components/MatchScoreComponent/MatchScoreComponent";
 
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 const UserOutput = () => {
   const {
     extractedResumeText,
@@ -29,92 +32,101 @@ const UserOutput = () => {
   // Function to render the skill comparison table
   const renderSkillsTable = () => {
     return (
-      <table className="skills-table">
-        <thead>
-          <tr>
-            <th>Tech Skills</th>
-            <th>Resume</th>
-            <th>Job Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {hardskillsjd.map((skill, index) => (
-            <tr key={index}>
-              <td>{skill}</td>
-              <td>
-                {hardskillsre.includes(skill) ? (
-                  <span className="green-check">✅</span>
-                ) : (
-                  <span className="red-cross">❌</span>
-                )}
-              </td>
-              <td><span className="green-check">✅</span></td>
+      <div className="table-container">
+        <table className="styled-table">
+          <thead>
+            <tr>
+              <th>Tech Skills</th>
+              <th>Resume</th>
+              <th>Job Description</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {hardskillsjd.map((skill, index) => (
+              <tr key={index}>
+                <td>{skill}</td>
+                <td>
+                  {hardskillsre.includes(skill) ? (
+                    <span className="green-check">✅</span>
+                  ) : (
+                    <span className="red-cross">❌</span>
+                  )}
+                </td>
+                <td><span className="green-check">✅</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     );
   };
+  
 
   // Function to render the soft skills comparison table
   const renderSoftSkillsTable = () => {
     return (
-      <table className="skills-table">
-        <thead>
-          <tr>
-            <th>Soft Skills</th>
-            <th>Resume</th>
-            <th>Job Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {softskillsjd.map((skill, index) => (
-            <tr key={index}>
-              <td>{skill}</td>
-              <td>
-                {softskillsre.includes(skill) ? (
-                  <span className="green-check">✅</span>
-                ) : (
-                  <span className="red-cross">❌</span>
-                )}
-              </td>
-              <td><span className="green-check">✅</span></td>
+      <div className="table-container">
+        <table className="styled-table">
+          <thead>
+            <tr>
+              <th>Soft Skills</th>
+              <th>Resume</th>
+              <th>Job Description</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {softskillsjd.map((skill, index) => (
+              <tr key={index}>
+                <td>{skill}</td>
+                <td>
+                  {softskillsre.includes(skill) ? (
+                    <span className="green-check">✅</span>
+                  ) : (
+                    <span className="red-cross">❌</span>
+                  )}
+                </td>
+                <td><span className="green-check">✅</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     );
   };
+  
 
   // Function to render the keywords comparison table
   const renderKeywordsTable = () => {
     return (
-      <table className="skills-table">
-        <thead>
-          <tr>
-            <th>Keywords</th>
-            <th>Resume</th>
-            <th>Job Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {keywordsjd.map((keyword, index) => (
-            <tr key={index}>
-              <td>{keyword}</td>
-              <td>
-                {keywordsre.includes(keyword) ? (
-                  <span className="green-check">✅</span>
-                ) : (
-                  <span className="red-cross">❌</span>
-                )}
-              </td>
-              <td><span className="green-check">✅</span></td>
+      <div className="table-container">
+        <table className="styled-table">
+          <thead>
+            <tr>
+              <th>Keywords</th>
+              <th>Resume</th>
+              <th>Job Description</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {keywordsjd.map((keyword, index) => (
+              <tr key={index}>
+                <td>{keyword}</td>
+                <td>
+                  {keywordsre.includes(keyword) ? (
+                    <span className="green-check">✅</span>
+                  ) : (
+                    <span className="red-cross">❌</span>
+                  )}
+                </td>
+                <td><span className="green-check">✅</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     );
   };
+  
 
   // Function to highlight matching jdre in the extracted resume text
   const highlightMatchingJDRE = (text) => {
@@ -186,14 +198,53 @@ const UserOutput = () => {
   ).toFixed(2);
 
   // Calculate overall score by considering all matching words (no duplicates)
-  const uniqueMatchingWords = new Set([
-    ...hardskillsjd.filter((skill) => hardskillsre.includes(skill)),
-    ...softskillsjd.filter((skill) => softskillsre.includes(skill)),
-    ...keywordsjd.filter((keyword) => keywordsre.includes(keyword)),
-  ]);
-
-  const overallScore = ((uniqueMatchingWords.size /
-    (hardskillsjd.length + softskillsjd.length + keywordsjd.length)) * 100).toFixed(2);
+  const calculateOverallScore = (state) => {
+    const {
+      keywordsjd, // Keywords in Job Description
+      keywordsre, // Keywords in Resume
+      phone,
+      email,
+      address,
+      linkedin,
+      structure, // Structure from Redux store
+      wordcount, // Total word count from Redux store
+    } = state.userInput;
+  
+    // 1. Keyword Matching (60/100)
+    const matchingKeywords = keywordsjd.filter(keyword => keywordsre.includes(keyword)).length;
+    const keywordMatching = ((matchingKeywords / keywordsjd.length) * 60) || 0;
+  
+    // 2. Essential Info (10/100)
+    let essentialInfo = 10;
+    const missingFields = [phone, email, address, linkedin].filter(field => !field).length;
+    essentialInfo -= missingFields * 2.5;
+  
+    // 3. Structure Info (10/100)
+    let structureInfo = structure === "good" ? 10 : structure === "average" ? 5 : 0;
+  
+    // 4. Word Count Info (20/100)
+    let wordcountInfo = 0;
+    if (wordcount >= 475 && wordcount <= 600) wordcountInfo = 20;
+    else if ((wordcount > 600 && wordcount <= 800) || (wordcount >= 300 && wordcount < 475)) wordcountInfo = 10;
+  
+    // Final Overall Score Calculation
+    const overallScore = (
+      keywordMatching + essentialInfo + structureInfo + wordcountInfo
+    ).toFixed(2);
+  
+    // Print the values
+    console.log("Keyword Matching Score:", keywordMatching);
+    console.log("Essential Info Score:", essentialInfo);
+    console.log("Structure Info Score:", structureInfo);
+    console.log("Word Count Score:", wordcountInfo);
+    console.log("Final Overall Score:", overallScore);
+  
+    return overallScore;
+  };
+  
+  // Example usage in the component
+  const overallScore = calculateOverallScore(useSelector(state => state));
+  
 
   return (
     <div className="container">
@@ -268,21 +319,39 @@ const UserOutput = () => {
 
               {/* Displaying the Percentage of Matching Hard Skills */}
               <div className="contact-section">
-                <h3>💡 Skills Comparison</h3>
-                <p>
-                  Out of <strong>{hardskillsjd.length}</strong> hard skills in the job description, you have <strong>{matchingHardSkills}</strong> matching skills in your resume. This is {matchingPercentage}% of the required skills.
-                </p>
-                {renderSkillsTable()}
+              <div className="score-container">
+                <div className="score-label">
+                  
+                  <CircularProgressbar value={matchingPercentage} text={`${matchingPercentage}%`} />
+                  </div>
+                <div className="skills-comparison">
+                  <h3>💡 Skills Comparison</h3>
+                  <p>
+                    Out of <strong>{hardskillsjd.length}</strong> hard skills in the job description, you have <strong>{matchingHardSkills}</strong> matching skills in your resume. This is {matchingPercentage}% of the required skills.
+                  </p>
+                </div>
               </div>
+              {renderSkillsTable()}
+            </div>
+
 
               {/* Displaying the Percentage of Matching Soft Skills */}
               <div className="contact-section">
-                <h3>💡 Soft Skills Comparison</h3>
-                <p>
-                  Out of <strong>{softskillsjd.length}</strong> soft skills in the job description, you have <strong>{matchingSoftSkills}</strong> matching skills in your resume. This is {matchingSoftSkillsPercentage}% of the required skills.
-                </p>
+                <div className="score-container">
+                  <div className="score-label">
+                    {/* {matchingSoftSkillsPercentage}% */}
+                    <CircularProgressbar value={matchingSoftSkillsPercentage} text={`${matchingSoftSkillsPercentage}%`} />
+                    </div>
+                  <div className="skills-comparison">
+                    <h3>💡 Soft Skills Comparison</h3>
+                    <p>
+                      Out of <strong>{softskillsjd.length}</strong> soft skills in the job description, you have <strong>{matchingSoftSkills}</strong> matching skills in your resume. This is {matchingSoftSkillsPercentage}% of the required skills.
+                    </p>
+                  </div>
+                </div>
                 {renderSoftSkillsTable()}
               </div>
+
 
               {/* Displaying the Percentage of Matching Keywords */}
               <div className="contact-section">

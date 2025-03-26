@@ -29,7 +29,7 @@
     stroke: #f39c12;
     stroke-width: 3.8;
     stroke-linecap: round;
-    transform: rotate(-90deg);
+    /* transform: rotate(-90deg); */
     transform-origin: 50% 50%;
     transition: stroke-dasharray 0.6s ease-in-out;
   }
@@ -57,4 +57,5 @@
     font-size: 14px;
     color: #666;
   }
+  
   

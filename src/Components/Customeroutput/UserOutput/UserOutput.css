@@ -199,7 +199,7 @@ p {
   margin-top: 20px;
   padding: 20px;
   border: 1px solid #e0e0e0;
-  background-color: #f7f7f7;
+  background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
@@ -369,3 +369,314 @@ pre {
 }
 
 
+
+
+
+
+
+.table-container {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  
+}
+
+.table-header {
+  background: linear-gradient(90deg, #8e24aa, #7b1fa2);
+  padding: 15px;
+  border-radius: 8px 8px 0 0;
+  color: white;
+  text-align: left;
+}
+
+.table-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.table-subtitle {
+  margin: 5px 0 0;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+.styled-table th {
+  text-align: left;
+  font-size: 14px;
+  color: #8e24aa;
+  padding: 10px;
+}
+
+.styled-table td {
+  padding: 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.green-check {
+  color: green;
+}
+
+.red-cross {
+  color: red;
+}
+
+
+
+.score-container {
+  display: flex;
+  align-items: center; /* Align items in the center */
+  gap: 15px; /* Space between "Score" and the right content */
+}
+
+.score-label {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+
+  max-width: 60px ;
+  max-height: 60px ; /* Ensures Score stays on the left */
+  text-align: center;
+}
+
+.skills-comparison {
+  display: flex;
+  flex-direction: column; /* Stack title and paragraph */
+}
+
+.modern-check,
+.modern-cross {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: relative;
+}
+
+
+.modern-check::after {
+  content: '✔';
+  font-size: 14px;
+  color: green;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+
+
+.modern-cross::after {
+  content: '✖';
+  font-size: 14px;
+  color: red;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+
+
+
+
+
+
+
+.contact-section.white-background {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.contact-section.white-background:hover {
+  transform: translateY(-5px);
+}
+
+.contact-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.contact-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+  position: relative;
+  
+  border-radius: 50%;
+}
+
+.phone-icon {
+  width: 30px;
+  height: 30px;
+  
+  position: relative;
+}
+
+.phone-icon::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.phone-icon::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  width: 12px;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.contact-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.contact-details {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.contact-details strong {
+  color: #4caf50; /* Green color for emphasis */
+}
+
+.contact-section.white-background:hover .contact-title {
+  color: #4caf50; /* Green color on hover for title */
+}
+
+
+.contact-section.white-background {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.contact-section.white-background:hover {
+  transform: translateY(-5px);
+}
+
+.contact-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.contact-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+  position: relative;
+  
+  border-radius: 50%;
+}
+
+.email-icon {
+  background-color: #007bff; /* Blue color for email */
+}
+
+.email-icon::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.address-icon {
+  background-color: #f44336; /* Red color for address */
+}
+
+.address-icon::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.linkedin-icon {
+  background-color: #0077b5; /* LinkedIn Blue color */
+}
+
+.linkedin-icon::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.contact-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.contact-details {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.contact-details strong {
+  color: #4caf50; /* Green color for emphasis */
+}
+
+.contact-section.white-background:hover .contact-title {
+  color: #4caf50; /* Green color on hover for title */
+}
+
+a {
+  color: #0077b5; /* Blue color for LinkedIn link */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
