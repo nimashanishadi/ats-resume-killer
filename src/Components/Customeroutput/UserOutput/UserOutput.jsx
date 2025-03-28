@@ -203,19 +203,25 @@ const UserOutput = () => {
   // Calculate overall score by considering all matching words (no duplicates)
   const calculateOverallScore = (state) => {
     const {
-      keywordsjd, // Keywords in Job Description
-      keywordsre, // Keywords in Resume
-      phone,
-      email,
-      address,
-      linkedin,
-      structure, // Structure from Redux store
-      wordcount, // Total word count from Redux store
+      keywordsjd, softskillsjd, hardskillsjd, // Job Description Keywords
+      keywordsre, softskillsre, hardskillsre, matchingjdre, // Resume Keywords
+      phone, email, address, linkedin,
+      structure,
+      wordcount,
     } = state.userInput;
   
-    // 1. Keyword Matching (60/100)
-    const matchingKeywords = keywordsjd.filter(keyword => keywordsre.includes(keyword)).length;
-    const keywordMatching = ((matchingKeywords / keywordsjd.length) * 60) || 0;
+    // Combine all keywords from job description and resume, removing duplicates
+    const jobDescriptionKeywords = [...new Set([...keywordsjd, ...softskillsjd, ...hardskillsjd])];
+    const resumeKeywords = [...new Set([...keywordsre, ...softskillsre, ...hardskillsre, ...matchingjdre])];
+  
+    // Count matching keywords
+    const matchingKeywords = jobDescriptionKeywords.filter(keyword => resumeKeywords.includes(keyword)).length;
+    
+    // Calculate keyword matching percentage
+    const keywordMatchingPercentage = (matchingKeywords / jobDescriptionKeywords.length) || 0;
+  
+    // Weight it based on 60
+    const keywordMatching = (keywordMatchingPercentage * 60).toFixed(2);
   
     // 2. Essential Info (10/100)
     let essentialInfo = 10;
@@ -232,7 +238,7 @@ const UserOutput = () => {
   
     // Final Overall Score Calculation
     const overallScore = (
-      keywordMatching + essentialInfo + structureInfo + wordcountInfo
+      parseFloat(keywordMatching) + essentialInfo + structureInfo + wordcountInfo
     ).toFixed(2);
   
     // Print the values
@@ -243,7 +249,8 @@ const UserOutput = () => {
     console.log("Final Overall Score:", overallScore);
   
     return overallScore;
-  };
+};
+
   
   // Example usage in the component
   const overallScore = calculateOverallScore(useSelector(state => state));

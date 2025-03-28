@@ -14,26 +14,27 @@ const UserWelcomeNote = ({ onClose }) => {
       <div className="content">
         <div className="section-1">
         <div className="section">
-          <h3>Perfect every job application</h3>
+          <h3>Perfect for every job application</h3>
           <ul>
-            <li>🔒 <em>Unlimited</em> resume and cover letter scans</li>
-            <li>🔒 Power Edit your resume</li>
+            <li>🔒 <em>Unlimited </em>  _resume scans</li>
+            <li>🔒 Generate your Cover Letter</li>
           </ul>
         </div>
 
         <div className="section">
           <h3>Discover ebooks and templates</h3>
           <ul>
-            <li>🔒 ATS Revealed eBook</li>
+            <li>🔒 ATS Revealed eBooks</li>
             <li>🔒 Cover letter template</li>
-            <li>🔹 <a href="#">20 ATS friendly resume templates</a></li>
+            <li>🔹 <a href="#">ATS friendly resume templates</a></li>
           </ul>
         </div>
 
         <div className="section">
-          <h3>Brush up on the basics</h3>
+          <h3>Validate and Match your Skills</h3>
           <ul>
-            <li>🔹 <a href="#">Learning center</a> with how-tos on every aspect of your job search</li>
+            <li>🔹 <a href="#">Scan here</a> with how-tos on every aspect of your job search</li>
+            <li>🔹 <a href="#">Scan here</a> with crack down all ket words </li>
           </ul>
         </div>
 
